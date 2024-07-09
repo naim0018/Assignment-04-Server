@@ -2,6 +2,7 @@ import { StatusCodes } from "http-status-codes";
 import { catchAsync } from "../../app/utils/catchAsync";
 import { sendResponse } from "../../app/utils/sendResponse";
 import { ProductService } from "./product.service";
+import { AppError } from "../../app/error/AppError";
 
 const createProduct =  catchAsync(async (req,res)=>{
     const result = await ProductService.createProductData(req.body)
@@ -15,10 +16,8 @@ const createProduct =  catchAsync(async (req,res)=>{
 
 const getAllProduct =  catchAsync(async (req,res)=>{
     const result = await ProductService.getAllProductData()
-    console.log(result)
-
-    if(result){
-        throw new Error("No data found")
+    if(result.length === 0){
+        throw new AppError(StatusCodes.NOT_FOUND,"No data found")
     }
 
     sendResponse(res,{
