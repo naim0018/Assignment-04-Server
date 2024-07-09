@@ -10,7 +10,7 @@ const createProductData =async(payload:TProduct)=>{
     return result
 }
 const updateProductData =async(id:string,payload:TProduct)=>{
-    const result = await ProductModel.findByIdAndUpdate({_id:id},payload)
+    const result = await ProductModel.findByIdAndUpdate({_id:id},payload,{new:true})
     return result
 }
 const deleteProductData =async(id:string)=>{

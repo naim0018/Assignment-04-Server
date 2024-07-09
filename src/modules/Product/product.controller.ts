@@ -15,10 +15,16 @@ const createProduct =  catchAsync(async (req,res)=>{
 
 const getAllProduct =  catchAsync(async (req,res)=>{
     const result = await ProductService.getAllProductData()
+    console.log(result)
+
+    if(result){
+        throw new Error("No data found")
+    }
+
     sendResponse(res,{
         success:true,
         statusCode:StatusCodes.OK,
-        message:"Product created successfully",
+        message:"Product fetched successfully",
         data:result
     })
 })
@@ -29,7 +35,7 @@ const updateProductData =  catchAsync(async (req,res)=>{
     sendResponse(res,{
         success:true,
         statusCode:StatusCodes.OK,
-        message:"Product created successfully",
+        message:"Product updated successfully",
         data:result
     })
 })
@@ -39,7 +45,7 @@ const deleteProductData =  catchAsync(async (req,res)=>{
     sendResponse(res,{
         success:true,
         statusCode:StatusCodes.OK,
-        message:"Product created successfully",
+        message:"Product deleted successfully",
         data:result
     })
 })
