@@ -6,6 +6,7 @@ import { AppError } from "../../app/error/AppError";
 
 const createProduct =  catchAsync(async (req,res)=>{
     const result = await ProductService.createProductData(req.body)
+
     sendResponse(res,{
         success:true,
         statusCode:StatusCodes.OK,
@@ -15,11 +16,23 @@ const createProduct =  catchAsync(async (req,res)=>{
 })
 
 const getAllProduct =  catchAsync(async (req,res)=>{
-    const result = await ProductService.getAllProductData()
+    const result = await ProductService.getAllProductData(req.params)
     if(result.length === 0){
         throw new AppError(StatusCodes.NOT_FOUND,"No data found")
     }
 
+    sendResponse(res,{
+        success:true,
+        statusCode:StatusCodes.OK,
+        message:"Product fetched successfully",
+        data:result
+    })
+})
+const getSingleProduct =  catchAsync(async (req,res)=>{
+    const result = await ProductService.getSingleProductData(req.params.id)
+    if(result === null){
+        throw new AppError(StatusCodes.NOT_FOUND,"No data found")
+    }
     sendResponse(res,{
         success:true,
         statusCode:StatusCodes.OK,
@@ -52,6 +65,7 @@ const deleteProductData =  catchAsync(async (req,res)=>{
 export const ProductController = {
     createProduct,
     getAllProduct,
+    getSingleProduct,
     updateProductData,
     deleteProductData,
 
