@@ -16,7 +16,9 @@ const createProduct =  catchAsync(async (req,res)=>{
 })
 
 const getAllProduct =  catchAsync(async (req,res)=>{
-    const result = await ProductService.getAllProductData(req.params)
+    
+    const result = await ProductService.getAllProductData(req.query)
+
     if(result.length === 0){
         throw new AppError(StatusCodes.NOT_FOUND,"No data found")
     }
