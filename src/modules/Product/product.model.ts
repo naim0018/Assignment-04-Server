@@ -13,7 +13,6 @@ export const productSchema =  new Schema<TProduct>({
     },
     rating:{
         type:Number,
-        required:[true,'Rating is required']
     },
     img:{
         type:String,
