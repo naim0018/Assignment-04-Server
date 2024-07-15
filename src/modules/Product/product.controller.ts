@@ -5,8 +5,9 @@ import { ProductService } from "./product.service";
 import { AppError } from "../../app/error/AppError";
 
 const createProduct =  catchAsync(async (req,res)=>{
+    
     const result = await ProductService.createProductData(req.body)
-
+    // console.log(result)
     sendResponse(res,{
         success:true,
         statusCode:StatusCodes.OK,
@@ -44,7 +45,7 @@ const getSingleProduct =  catchAsync(async (req,res)=>{
 })
 
 const updateProductData =  catchAsync(async (req,res)=>{
-    
+    console.log(req.params.id,req.body)
     const result = await ProductService.updateProductData( req.params.id,req.body)
     sendResponse(res,{
         success:true,
@@ -55,6 +56,7 @@ const updateProductData =  catchAsync(async (req,res)=>{
 })
 
 const deleteProductData =  catchAsync(async (req,res)=>{
+    console.log(req.params.id)
     const result = await ProductService.deleteProductData(req.params.id)
     sendResponse(res,{
         success:true,
