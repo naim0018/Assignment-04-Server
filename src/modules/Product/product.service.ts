@@ -6,7 +6,7 @@ const getAllProductData =async(payload:Record<string, any>)=>{
     
 
     let search = ''
-    let sort = 'createdAt'
+    let sort = 'price'
 
     if(payload.search){
         search = payload.search
@@ -42,6 +42,7 @@ const getSingleProductData =async(id:string)=>{
 }
 const createProductData =async(payload:TProduct)=>{
     const result = await ProductModel.create(payload)
+  
     return result
 }
 const updateProductData =async(id:string,payload:TProduct)=>{
